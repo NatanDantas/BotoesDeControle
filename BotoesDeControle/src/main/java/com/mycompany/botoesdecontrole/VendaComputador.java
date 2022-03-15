@@ -4,6 +4,8 @@
  */
 package com.mycompany.botoesdecontrole;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -44,6 +46,8 @@ public class VendaComputador extends javax.swing.JFrame {
         chkMouse = new javax.swing.JCheckBox();
         chkHeadset = new javax.swing.JCheckBox();
         cboTipoArmazenamento = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstServicos = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,6 +194,13 @@ public class VendaComputador extends javax.swing.JFrame {
             }
         });
 
+        lstServicos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Garantia de 2 anos em todas as peças", "Windows 10 Pro, Instalado", "Antivirus e pacote office" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstServicos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,11 +213,14 @@ public class VendaComputador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cboTipoArmazenamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 31, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnConfirmar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 138, Short.MAX_VALUE)
+                                .addComponent(BtnConfirmar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cboTipoArmazenamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -218,9 +232,12 @@ public class VendaComputador extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cboTipoArmazenamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cboTipoArmazenamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(BtnConfirmar)
                 .addContainerGap())
         );
@@ -273,8 +290,19 @@ public class VendaComputador extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um Tipo de Armazenamento");
         }
-
-
+        
+  //      String itemJList = lstServicos.getSelectedValue();
+  //      JOptionPane.showMessageDialog(this, itemJList);
+          ArrayList<String> lstItens = (ArrayList<String>) lstServicos.getSelectedValuesList();
+          
+          
+          //*----- For Each -----*
+          String itensLista = " ";
+          for (String item : lstItens) {
+            itensLista += item + ",  ";
+        }
+          JOptionPane.showMessageDialog(this, itensLista);
+ 
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void rboPcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rboPcActionPerformed
@@ -342,6 +370,8 @@ public class VendaComputador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lstServicos;
     private javax.swing.JRadioButton rboNotebook;
     private javax.swing.JRadioButton rboPc;
     private javax.swing.JRadioButton rboServer;
